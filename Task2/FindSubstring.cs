@@ -3,35 +3,23 @@ using System;
 
 public class Algorithms
 {
-    public static int FindSubstring(string str, string sub)
+    public static bool IsSubstring(string str, string sub)
     {
         var strLength = str.Length;
         var subLength = sub.Length;
-        var rangeLength = strLength - subLength + 1;
         
-        if (subLength > strLength)
+        for (var i = 0; i <= (strLength - subLength); ++i)
         {
-            return -1;
-        }
-        
-        for (var i = 0; i < rangeLength; ++i)
-        {
-            if (str[i] == sub[0])
-            {   
-                var j = 0;
-                
-                while (j < subLength && str[i + j] == sub[j])
+            for (var j = 0; j < subLength && str[i + j] == sub[j]; ++j)
+            {
+                if (j == subLength - 1)
                 {
-                    if (j == subLength - 1)
-                    {
-                        return i;
-                    }
-                    ++j;
+                    return true;
                 }
             }
         }
         
-        return -1;
+        return false;
     }
 }
 
@@ -43,6 +31,6 @@ public class SolutionOfProblem
         str = Console.ReadLine();
         sub = Console.ReadLine();
         
-        Console.WriteLine(Algorithms.FindSubstring(str, sub));
+        Console.WriteLine(Algorithms.IsSubstring(str, sub));
     }
 }

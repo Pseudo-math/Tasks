@@ -49,8 +49,35 @@ namespace AlgorithmsDataStructures
 
      public bool Remove(int _value)
      {
-       // здесь будет ваш код удаления одного узла по заданному значению
-       return true; // если узел был удалён
+       if (head == null) return false;
+       if (head.value == _value)
+       {
+          if (head == tail) 
+          {
+             head = null;
+             tail = null;
+          }
+          else head = head.next;
+          return true;
+       }
+       Node nodeFirst = head;
+       Node nodeSecond = head.next;
+       while (nodeSecond != null)
+       {
+          if (nodeSecond.value == _value)
+          {
+               if (nodeSecond == tail) 
+               {
+                  tail = nodeFirst;
+                  tail.next == null;
+               }
+               else nodeFirst.next = nodeSecond.next;
+               return true;
+          }
+          nodeFirst = nodeSecond;
+          nodeSecond = nodeSecond.next;
+       }
+       return false;
      }
 
      public void RemoveAll(int _value)

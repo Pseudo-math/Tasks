@@ -43,7 +43,15 @@ namespace AlgorithmsDataStructures
      public List<Node> FindAll(int _value)
      {
        List<Node> nodes = new List<Node>();
-       // здесь будет ваш код поиска всех узлов по заданному значению
+       Node node = LinkedList.Find(_value);
+       Node start = head;
+       while (node != null)
+       {
+          nodes.Add(node);
+          head = node.next;
+          node = LinkedList.Find(_value);
+       }
+       head = start;
        return nodes;
      }
 
@@ -82,26 +90,40 @@ namespace AlgorithmsDataStructures
 
      public void RemoveAll(int _value)
      {
-       // здесь будет ваш код удаления всех узлов по заданному значению
+       while (LinkedList.Remove(_value));
      }
 
      public void Clear()
      {
-       // здесь будет ваш код очистки всего списка
+       Node node = head;
+       while (head != tail)  {
+          head = head.next;
+          node.next = null;
+          node = head;
+       }
+       node = null;
+       tail = null;
      }
 
      public int Count()
      {
-       return 0; // здесь будет ваш код подсчёта количества элементов в списке
+       var i = 0;
+       Node node = head;
+       while (node != null) 
+       {
+          ++i;
+          node = node.next
+       }
+       return i;
      }
 
      public void InsertAfter(Node _nodeAfter, Node _nodeToInsert)
      {
-       // здесь будет ваш код вставки узла после заданного
-
-       // если _nodeAfter = null , 
-       // добавьте новый элемент первым в списке 
-     }
-
+       if (_nodeAfter == null) LinkedList.AddInTail(_nodeToInsert);
+       else
+       {
+          _nodeToInsert.next = _nodeAfter.next;
+          _nodeAfter.next = _nodeToInsert;
+       }
     }
 }

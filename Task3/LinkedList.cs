@@ -43,17 +43,18 @@ namespace AlgorithmsDataStructures
      public List<Node> FindAll(int _value)
      {
        List<Node> nodes = new List<Node>();
-       Node node = LinkedList.Find(_value);
+       Node node = Find(_value);
        Node start = head;
        while (node != null)
        {
           nodes.Add(node);
           head = node.next;
-          node = LinkedList.Find(_value);
+          node = Find(_value);
        }
        head = start;
        return nodes;
      }
+    
 
      public bool Remove(int _value)
      {
@@ -77,9 +78,13 @@ namespace AlgorithmsDataStructures
                if (nodeSecond == tail) 
                {
                   tail = nodeFirst;
-                  tail.next == null;
+                  tail.next = null;
                }
-               else nodeFirst.next = nodeSecond.next;
+               else 
+               {
+                  nodeFirst.next = nodeSecond.next;
+                  nodeSecond.next = null;
+               }
                return true;
           }
           nodeFirst = nodeSecond;
@@ -90,7 +95,7 @@ namespace AlgorithmsDataStructures
 
      public void RemoveAll(int _value)
      {
-       while (LinkedList.Remove(_value));
+       while (Remove(_value));
      }
 
      public void Clear()
@@ -101,7 +106,7 @@ namespace AlgorithmsDataStructures
           node.next = null;
           node = head;
        }
-       node = null;
+       head = null;
        tail = null;
      }
 
@@ -112,18 +117,28 @@ namespace AlgorithmsDataStructures
        while (node != null) 
        {
           ++i;
-          node = node.next
+          node = node.next;
        }
        return i;
      }
 
      public void InsertAfter(Node _nodeAfter, Node _nodeToInsert)
      {
-       if (_nodeAfter == null) LinkedList.AddInTail(_nodeToInsert);
+       if (_nodeAfter == null)
+       {
+           _nodeToInsert.next = head;
+           head = _nodeToInsert;
+       }
+       else if (_nodeAfter == tail)
+       {
+          AddInTail(_nodeToInsert);
+       }
        else
        {
           _nodeToInsert.next = _nodeAfter.next;
           _nodeAfter.next = _nodeToInsert;
        }
-    }
+     }
+   }
 }
+

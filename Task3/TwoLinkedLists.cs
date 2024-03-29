@@ -142,17 +142,15 @@ namespace AlgorithmsDataStructures
    {
        public static LinkedList SumOfLinkedLists(LinkedList listFirst, LinkedList listSecond)
         {
-            LinkedList result = new LinkedList();
-           if (listFirst.Count() == listSecond.Count())
+           LinkedList result = new LinkedList();
+           if (listFirst.Count() != listSecond.Count()) return result;
+           Node nodeFirst = listFirst.head;
+           Node nodeSecond = listSecond.head;
+           while (nodeFirst != null)
            {
-             Node nodeFirst = listFirst.head;
-             Node nodeSecond = listSecond.head;
-             while (nodeFirst != null)
-             {
-               result.AddInTail(new Node(nodeFirst.value + nodeSecond.value));
-               nodeFirst = nodeFirst.next;
-               nodeSecond = nodeSecond.next;
-             }
+             result.AddInTail(new Node(nodeFirst.value + nodeSecond.value));
+             nodeFirst = nodeFirst.next;
+             nodeSecond = nodeSecond.next;
            }
            return result;
         }

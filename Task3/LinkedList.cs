@@ -101,7 +101,8 @@ namespace AlgorithmsDataStructures
      public void Clear()
      {
        Node node = head;
-       while (head != tail)  {
+       while (head != tail)  
+       {
           head = head.next;
           node.next = null;
           node = head;
@@ -124,14 +125,11 @@ namespace AlgorithmsDataStructures
 
      public void InsertAfter(Node _nodeAfter, Node _nodeToInsert)
      {
-       if (_nodeAfter == null)
+       if (head == null || _nodeAfter == tail) AddInTail(_nodeToInsert);
+       else if (_nodeAfter == null)
        {
            _nodeToInsert.next = head;
            head = _nodeToInsert;
-       }
-       else if (_nodeAfter == tail)
-       {
-          AddInTail(_nodeToInsert);
        }
        else
        {

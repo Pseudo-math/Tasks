@@ -138,39 +138,36 @@ namespace AlgorithmsDataStructures
        }
      }
    }
-   public static LinkedList SumOfLinkedLists(LinkedList listFirst, LinkedList listSecond)
-   {
-       LinkedList result = new LinkedList();
-       if (listFirst.Count() == listSecond.Count())
-       {
-         Node nodeFirst = listFirst.head;
-         Node nodeSecond = listSecond.head;
-         while (node != null)
-         {
-           result.AddInTail(new Node(nodeFirst.value + nodeSecond.value);
-           nodeFirst = nodeFirst.next;
-           nodeSecond = nodeSecond.next;
-         }
-       }
-       return result;
-   }
    public class Program 
    {
-       public static void Main()
-       {
-           LinkedList snake = new LinkedList();
-           for (int j = 0; j < 5; ++j)
+       public static LinkedList SumOfLinkedLists(LinkedList listFirst, LinkedList listSecond)
+        {
+            LinkedList result = new LinkedList();
+           if (listFirst.Count() == listSecond.Count())
            {
-               snake.Clear();
-               for (int i = 0; i < j; ++i)
-               {
-                   snake.AddInTail(new Node(i));
-               }
-               Console.WriteLine(snake.Count());
-               snake.InsertAfter(snake.Find(1), new Node(100));
-               Console.WriteLine(snake.Count() + "\n");
-           }   
-               
-       }
+             Node nodeFirst = listFirst.head;
+             Node nodeSecond = listSecond.head;
+             while (nodeFirst != null)
+             {
+               result.AddInTail(new Node(nodeFirst.value + nodeSecond.value));
+               nodeFirst = nodeFirst.next;
+               nodeSecond = nodeSecond.next;
+             }
+           }
+           return result;
+        }
+       public static void Main()
+        {
+           LinkedList snakeFirst = new LinkedList();
+           LinkedList snakeSecond = new LinkedList();
+           for (int i = 0; i < 10; ++i)
+            {
+                   snakeFirst.AddInTail(new Node(i));
+                   snakeSecond.AddInTail(new Node(i));
+            }
+            Console.WriteLine(Program.SumOfLinkedLists(snakeFirst, snakeSecond).Count());
+            snakeSecond.AddInTail(new Node(100));
+            Console.WriteLine(Program.SumOfLinkedLists(snakeFirst, snakeSecond).Count());
+        }
    }
 }

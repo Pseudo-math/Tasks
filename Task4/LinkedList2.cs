@@ -125,7 +125,7 @@ namespace AlgorithmsDataStructures
           _nodeToInsert.next = _nodeAfter.next;
           _nodeToInsert.prev = _nodeAfter;
           _nodeToInsert.next.prev = _nodeToInsert;
-          _nodeAfter.next = _nodeToInsert
+          _nodeAfter.next = _nodeToInsert;
        }
        else AddInTail(_nodeToInsert);
        ++count;

@@ -20,11 +20,13 @@ namespace AlgorithmsDataStructures
    {
      public Node head;
      public Node tail;
+     private int count;
 
      public LinkedList2()
      {
        head = null;
        tail = null;
+       count = 0;
      }
 
      public void AddInTail(Node _item)
@@ -38,6 +40,7 @@ namespace AlgorithmsDataStructures
         _item.prev = tail;
        }
        tail = _item;
+       ++count;
      }
 
      public Node Find(int _value)
@@ -65,25 +68,65 @@ namespace AlgorithmsDataStructures
        return nodes;
      }
 
+     public void Remove(Node node)
+     {
+       if (node.prev != null) node.prev.next = node.next;
+       if (node.next != null) node.next.prev = node.prev;
+       if (node == head) head = node.next;
+       if (node == tail) tail = node.prev;
+       --count;
+     }
+   
      public bool Remove(int _value)
      {
        Node node = Find(_value);
-       return true; // если узел был удалён
+       if (node == null) return false;
+       /*if (node != head && node != tail)
+       {
+          node.prev.next = node.next;
+          node.next.prev = node.prev;
+       }
+       else
+       {
+          if (node == head)
+          {
+             head = head.next;
+             if (head != null) head.prev == null;
+          }
+          if (node == tail)
+          {
+             tail = tail.prev;
+             if (tail != null) tail.next == null;
+          }
+       */}
+       Remove(node);
+       return true;
      }
 
      public void RemoveAll(int _value)
      {
-       // здесь будет ваш код удаления всех узлов по заданному значению
+       nodesWillRemove = FindAll(_value);
+       for (var i in nodesWillRemove) Remove(i);
+       count -= nodesWillRemove.count;
      }
 
      public void Clear()
      {
-       // здесь будет ваш код очистки всего списка
+       Node node = head;
+       while (node != null)
+       { 
+         node = node.next;
+         head.next = null;
+         head.prev = null
+         head = node;
+       }
+       tail = null;
+       count = 0;
      }
 
      public int Count()
      {
-       return 0; // здесь будет ваш код подсчёта количества элементов в списке
+       return count;
      }
 
      public void InsertAfter(Node _nodeAfter, Node _nodeToInsert)

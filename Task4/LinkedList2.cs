@@ -119,6 +119,7 @@ namespace AlgorithmsDataStructures
           head.prev = _nodeToInsert;
           head = _nodeToInsert;
           head.prev = null;
+          ++count;
        }
        else if (_nodeAfter != null && _nodeAfter.next != null)
        {
@@ -126,9 +127,9 @@ namespace AlgorithmsDataStructures
           _nodeToInsert.prev = _nodeAfter;
           _nodeToInsert.next.prev = _nodeToInsert;
           _nodeAfter.next = _nodeToInsert;
+          ++count;
        }
        else AddInTail(_nodeToInsert);
-       ++count;
      }
 
     }

@@ -88,7 +88,7 @@ namespace AlgorithmsDataStructures
      public void RemoveAll(int _value)
      {
        nodesWillRemove = FindAll(_value);
-       for (var i in nodesWillRemove) Remove(i);
+       foreach (var i in nodesWillRemove) Remove(i);
        count -= nodesWillRemove.count;
      }
 

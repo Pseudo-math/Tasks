@@ -87,8 +87,9 @@ namespace AlgorithmsDataStructures
 
      public void RemoveAll(int _value)
      {
-       var nodesWillRemove = FindAll(_value);
-       foreach (var i in nodesWillRemove) Remove(i);
+       while (Remove(_value));
+       //var nodesWillRemove = FindAll(_value);
+       //foreach (var i in nodesWillRemove) Remove(i);
      }
 
      public void Clear()

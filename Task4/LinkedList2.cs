@@ -117,7 +117,7 @@ namespace AlgorithmsDataStructures
        { 
          node = node.next;
          head.next = null;
-         head.prev = null
+         head.prev = null;
          head = node;
        }
        tail = null;
@@ -131,11 +131,22 @@ namespace AlgorithmsDataStructures
 
      public void InsertAfter(Node _nodeAfter, Node _nodeToInsert)
      {
-       // здесь будет ваш код вставки узла после заданного узла
-
-       // если _nodeAfter = null
-       // добавьте новый элемент первым в списке 
-
+       if (_nodeAfter == null && head != null)
+       {
+          _nodeToInsert.next = head;
+          head.prev = _nodeToInsert;
+          head = _nodeToInsert;
+          head.prev = null;
+       }
+       else if (_nodeAfter != null && _nodeAfter.next != null)
+       {
+          _nodeToInsert.next = _nodeAfter.next;
+          _nodeToInsert.prev = _nodeAfter;
+          _nodeToInsert.next.prev = _nodeToInsert;
+          _nodeAfter.next = _nodeToInsert
+       }
+       else AddInTail(_nodeToInsert);
+       ++count;
      }
 
     }

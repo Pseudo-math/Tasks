@@ -89,7 +89,6 @@ namespace AlgorithmsDataStructures
      {
        var nodesWillRemove = FindAll(_value);
        foreach (var i in nodesWillRemove) Remove(i);
-       count -= nodesWillRemove.Count;
      }
 
      public void Clear()

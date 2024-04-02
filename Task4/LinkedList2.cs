@@ -42,20 +42,32 @@ namespace AlgorithmsDataStructures
 
      public Node Find(int _value)
      {
-       // здесь будет ваш код поиска
+       Node node = head;
+       while (node != null)
+       {
+         if (node.value == _value) return node;
+         node = node.next;
+       }
        return null;
      }
 
      public List<Node> FindAll(int _value)
      {
        List<Node> nodes = new List<Node>();
-       // здесь будет ваш код поиска всех узлов по заданному значению
+       Node node = Find(_value);
+       LinkedList2 sublist = this;
+       while (node != null)
+       {
+          nodes.Add(node);
+          sublist.head = node;
+          node = sublist.Find(_value);
+       }
        return nodes;
      }
 
      public bool Remove(int _value)
      {
-       // здесь будет ваш код удаления одного узла по заданному значению
+       Node node = Find(_value);
        return true; // если узел был удалён
      }
 

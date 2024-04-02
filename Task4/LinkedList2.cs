@@ -81,24 +81,6 @@ namespace AlgorithmsDataStructures
      {
        Node node = Find(_value);
        if (node == null) return false;
-       /*if (node != head && node != tail)
-       {
-          node.prev.next = node.next;
-          node.next.prev = node.prev;
-       }
-       else
-       {
-          if (node == head)
-          {
-             head = head.next;
-             if (head != null) head.prev == null;
-          }
-          if (node == tail)
-          {
-             tail = tail.prev;
-             if (tail != null) tail.next == null;
-          }
-       */}
        Remove(node);
        return true;
      }

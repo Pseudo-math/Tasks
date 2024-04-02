@@ -62,7 +62,7 @@ namespace AlgorithmsDataStructures
        while (node != null)
        {
           nodes.Add(node);
-          sublist.head = node;
+          sublist.head = node.next;
           node = sublist.Find(_value);
        }
        return nodes;

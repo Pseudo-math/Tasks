@@ -58,7 +58,9 @@ namespace AlgorithmsDataStructures
      {
        List<Node> nodes = new List<Node>();
        Node node = Find(_value);
-       LinkedList2 sublist = this;
+       LinkedList2 sublist = new LinkedList2();
+       sublist.head = head;
+       sublist.tail = tail;
        while (node != null)
        {
           nodes.Add(node);

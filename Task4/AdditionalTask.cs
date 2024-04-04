@@ -52,7 +52,6 @@ namespace AlgorithmsDataStructures
      public List<Node> FindAll(int _value)
      {
        List<Node> nodes = new List<Node>();
-       //Node node = Find(_value);
        LinkedList2 sublist = new LinkedList2();
        sublist.head.next = head.next;
        sublist.tail.prev = tail.prev;
@@ -61,12 +60,6 @@ namespace AlgorithmsDataStructures
           nodes.Add(node);
           sublist.head.next = node.next;
        }
-       /*while (node != null)
-       {
-          nodes.Add(node);
-          sublist.head.next = node.next;
-          node = sublist.Find(_value);
-       }*/
        return nodes;
      }
 
@@ -87,7 +80,6 @@ namespace AlgorithmsDataStructures
 
      public void RemoveAll(int _value)
      {
-       //while (Remove(_value));
        var nodesWillRemove = FindAll(_value);
        foreach (var i in nodesWillRemove) Remove(i);
      }
@@ -100,14 +92,6 @@ namespace AlgorithmsDataStructures
           node.next = null;
           node.prev = null;
        }
-       /*Node node = head.next;
-       while (node.isDummy != true)
-       { 
-         node = node.next;
-         head.next.next = null;
-         head.next.prev = null;
-         head.next = node;
-       }*/
        tail.prev = head;
        count = 0;
      }

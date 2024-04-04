@@ -8,14 +8,21 @@ namespace AlgorithmsDataStructures
    {
      public int value;
      public Node next, prev;
-     public bool isDummy;
 
      public Node(int _value) { 
        value = _value; 
        next = null;
        prev = null;
-       isDummy = false;
      }
+     public Node() { 
+       value = 0; 
+       next = null;
+       prev = null;
+     }
+   }
+   
+   public class DummyNode : Node
+   {
    }
 
    public class LinkedList2
@@ -26,12 +33,10 @@ namespace AlgorithmsDataStructures
 
      public LinkedList2()
      {
-       head = new Node(0);
-       tail = new Node(0);
+       head = new DummyNode();
+       tail = new DummyNode();
        head.next = tail;
        tail.prev = head;
-       head.isDummy = true;
-       tail.isDummy = true;
        count = 0;
      }
 
@@ -42,7 +47,7 @@ namespace AlgorithmsDataStructures
 
      public Node Find(int _value)
      {
-       for (Node node = head.next; node.isDummy != true; node = node.next)
+       for (Node node = head.next; node is DummyNode == false; node = node.next)
        {
           if (node.value == _value) return node;
        }
@@ -86,7 +91,7 @@ namespace AlgorithmsDataStructures
 
      public void Clear()
      {
-       for (Node node = head.next; node.isDummy == false; node = head.next)
+       for (Node node = head.next; node is DummyNode == false; node = head.next)
        {
           head.next = node.next;
           node.next = null;
@@ -110,5 +115,5 @@ namespace AlgorithmsDataStructures
        ++count;
      }
 
-    }
+    }    
 }

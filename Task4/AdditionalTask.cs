@@ -42,28 +42,31 @@ namespace AlgorithmsDataStructures
 
      public Node Find(int _value)
      {
-       Node node = head.next;
-       while (node.isDummy != true)
+       for (Node node = head.next; node.isDummy != true; node = node.next)
        {
-         if (node.value == _value) return node;
-         node = node.next;
+          if (node.vale == _value) return node;
        }
-       return null;
+       return null
      }
 
      public List<Node> FindAll(int _value)
      {
        List<Node> nodes = new List<Node>();
-       Node node = Find(_value);
+       //Node node = Find(_value);
        LinkedList2 sublist = new LinkedList2();
        sublist.head.next = head.next;
        sublist.tail.prev = tail.prev;
-       while (node != null)
+       for (Node node = Find(_value); node != null; node = sublist.Find(_value))
+       {
+          nodes.Add(node);
+          sublist.head.next = node.next
+       }
+       /*while (node != null)
        {
           nodes.Add(node);
           sublist.head.next = node.next;
           node = sublist.Find(_value);
-       }
+       */}
        return nodes;
      }
 
@@ -91,14 +94,20 @@ namespace AlgorithmsDataStructures
 
      public void Clear()
      {
-       Node node = head.next;
+       for (Node node = head.next; node.isDummy == false; node = head.next)
+       {
+          head.next = node.next;
+          node.next = null;
+          node.prev = null;
+       }
+       /*Node node = head.next;
        while (node.isDummy != true)
        { 
          node = node.next;
          head.next.next = null;
          head.next.prev = null;
          head.next = node;
-       }
+       */}
        tail.prev = head;
        count = 0;
      }

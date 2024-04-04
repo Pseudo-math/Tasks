@@ -46,7 +46,7 @@ namespace AlgorithmsDataStructures
        {
           if (node.vale == _value) return node;
        }
-       return null
+       return null;
      }
 
      public List<Node> FindAll(int _value)
@@ -59,14 +59,14 @@ namespace AlgorithmsDataStructures
        for (Node node = Find(_value); node != null; node = sublist.Find(_value))
        {
           nodes.Add(node);
-          sublist.head.next = node.next
+          sublist.head.next = node.next;
        }
        /*while (node != null)
        {
           nodes.Add(node);
           sublist.head.next = node.next;
           node = sublist.Find(_value);
-       */}
+       }*/
        return nodes;
      }
 

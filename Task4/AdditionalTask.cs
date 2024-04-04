@@ -44,7 +44,7 @@ namespace AlgorithmsDataStructures
      {
        for (Node node = head.next; node.isDummy != true; node = node.next)
        {
-          if (node.vale == _value) return node;
+          if (node.value == _value) return node;
        }
        return null;
      }
@@ -107,7 +107,7 @@ namespace AlgorithmsDataStructures
          head.next.next = null;
          head.next.prev = null;
          head.next = node;
-       */}
+       }*/
        tail.prev = head;
        count = 0;
      }

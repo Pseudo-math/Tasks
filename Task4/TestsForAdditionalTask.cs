@@ -56,8 +56,8 @@ namespace AlgorithmsDataStructures
        List<Node> nodes = new List<Node>();
        Node node = Find(_value);
        LinkedList2 sublist = new LinkedList2();
-       sublist.head = head;
-       sublist.tail = tail;
+       sublist.head.next = head.next;
+       sublist.tail.prev = tail.prev;
        while (node != null)
        {
           nodes.Add(node);
@@ -84,9 +84,8 @@ namespace AlgorithmsDataStructures
 
      public void RemoveAll(int _value)
      {
-       while (Remove(_value));
-       //var nodesWillRemove = FindAll(_value);
-       //foreach (var i in nodesWillRemove) Remove(i);
+       var nodesWillRemove = FindAll(_value);
+       foreach (var i in nodesWillRemove) Remove(i);
      }
 
      public void Clear()
@@ -118,7 +117,7 @@ namespace AlgorithmsDataStructures
      }
 
     }
- public class Program 
+public class Program 
    {
        public static void Main()
        {
@@ -315,3 +314,4 @@ namespace AlgorithmsDataStructures
        }          
     }
 }
+

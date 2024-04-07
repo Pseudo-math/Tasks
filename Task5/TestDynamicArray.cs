@@ -71,12 +71,12 @@ namespace AlgorithmsDataStructures
            Remove(index);
        }
      }
-
+    }
     public class Program
     {
-      public class Main()
+      public static void Main()
       {
-          DynArray<int> array = new DynArray();
+          DynArray<int> array = new DynArray<int>();
       }
     }
 }

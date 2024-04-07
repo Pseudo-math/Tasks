@@ -76,7 +76,31 @@ namespace AlgorithmsDataStructures
     {
       public static void Main()
       {
-          DynArray<int> array = new DynArray<int>();
+          Console.WriteLine(InsertTest());
+      }
+      public static bool InsertTest()
+      {
+          DynArray<int> arr = new DynArray<int>();
+          for (int i = 0; i < 16; ++i)
+          {
+              arr.Append(i);
+              if (arr.capacity != 16) return false;
+          }
+          if (arr.count != 16 || arr.capacity != 16) return false;
+          for (int i = 0; i < arr.count; ++i)
+          {
+              if (arr.GetItem(i) != i) return false;
+          }
+          arr.Insert(100, 5);
+          for (int i = 0; i < 17; ++i)
+          {
+              if (i < 5 && arr.GetItem(i) != i) return false;
+              if (i == 5 && arr.GetItem(i) != 100) return false;
+              if (i > 5 && arr.GetItem(i) != i - 1) return false;
+          }
+          if (arr.capacity != 32) return false;
+          //arr.Insert(200, 18);
+          return true;
       }
     }
 }

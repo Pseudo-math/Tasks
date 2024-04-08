@@ -57,7 +57,7 @@ namespace AlgorithmsDataStructures
      public void Remove(int index)
      {
        if (index < 0 || index >= count) throw new Exception("Index out of array range.");
-       else if (count - 1 >= (capacity / 2 + capacity % 2))
+       else if (count - 1 >= (capacity / 2 + capacity % 2) || capacity == 16)
        {
            for (var i = index; i < count - 1; ++i)
            {
@@ -65,11 +65,10 @@ namespace AlgorithmsDataStructures
            }
            --count;
        }
-       else if (capacity == 1)
+       else if (capacity < 16 * 1.5)
        {
-           --count;
-           MakeArray(0);
-       }
+           MakeArray(16);
+           Remove(index);
        else
        {
            MakeArray((int)(capacity / 1.5));

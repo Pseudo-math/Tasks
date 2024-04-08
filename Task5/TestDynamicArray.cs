@@ -77,6 +77,7 @@ namespace AlgorithmsDataStructures
       public static void Main()
       {
           Console.WriteLine(InsertTest());
+          Console.WriteLine(RemoveTest());
       }
       public static bool InsertTest()
       {
@@ -101,6 +102,31 @@ namespace AlgorithmsDataStructures
           if (arr.capacity != 32) return false;
           //arr.Insert(200, 18);
           return true;
+      }
+      public static bool RemoveTest()
+      {
+          DynArray<int> arr = new DynArray<int>();
+          for (int i = 0; i < 16; ++i)
+          {
+              arr.Append(i);
+              if (arr.capacity != 16) return false;
+          }
+          if (arr.count != 16 || arr.capacity != 16) return false;
+          for (int i = 15; i > 7; --i)
+          {
+              arr.Remove(i);
+              if (arr.count != i || arr.capacity != 16) return false;
+          }
+          arr.Remove(3);
+          for (int i = 0; i < 7; ++i)
+          {
+              if (i < 3 && arr.GetItem(i) != i) return false;
+              //if (i == 5 && arr.GetItem(i) != 100) return false;
+              if (i >= 3 && arr.GetItem(i) != i + 1) return false;
+          }
+          if (arr.capacity != 10) return false;
+          arr.Remove(18);
+          //return true;
       }
     }
 }

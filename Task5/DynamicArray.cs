@@ -65,6 +65,11 @@ namespace AlgorithmsDataStructures
            }
            --count;
        }
+       else if (capacity == 1)
+       {
+           --count;
+           MakeArray(0);
+       }
        else
        {
            MakeArray((int)(capacity / 1.5));

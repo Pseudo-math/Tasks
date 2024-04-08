@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 
@@ -57,7 +58,7 @@ namespace AlgorithmsDataStructures
      public void Remove(int index)
      {
        if (index < 0 || index >= count) throw new Exception("Index out of array range.");
-       else if (count - 1 >= (capacity / 2 + capacity % 2))
+       else if (count - 1 >= (capacity / 2 + capacity % 2) || capacity == 16)
        {
            for (var i = index; i < count - 1; ++i)
            {
@@ -65,10 +66,10 @@ namespace AlgorithmsDataStructures
            }
            --count;
        }
-       else if (capacity == 1)
+       else if (capacity < 16 * 1.5)
        {
-           --count;
-           MakeArray(0);
+           MakeArray(16);
+           Remove(index);
        }
        else
        {
@@ -78,6 +79,7 @@ namespace AlgorithmsDataStructures
      }
 
     }
+
     public class Program
     {
       public static void Main()
@@ -112,30 +114,29 @@ namespace AlgorithmsDataStructures
       public static bool RemoveTest()
       {
           DynArray<int> arr = new DynArray<int>();
-          for (int i = 0; i < 16; ++i)
+          for (int i = 0; i < 32; ++i)
           {
               arr.Append(i);
-              if (arr.capacity != 16) return false;
           }
-          if (arr.count != 16 || arr.capacity != 16) return false;
-          for (int i = 15; i > 7; --i)
+          if (arr.count != 32 || arr.capacity != 32) return false;
+          for (int i = 31; i > 15; --i)
           {
               arr.Remove(i);
-              if (arr.count != i || arr.capacity != 16) return false;
+              if (arr.count != i || arr.capacity != 32) return false;
           }
           arr.Remove(3);
-          for (int i = 0; i < 7; ++i)
+          for (int i = 0; i < 15; ++i)
           {
               if (i < 3 && arr.GetItem(i) != i) return false;
               //if (i == 5 && arr.GetItem(i) != 100) return false;
               if (i >= 3 && arr.GetItem(i) != i + 1) return false;
           }
-          if (arr.capacity != 10) return false;
-          for (int i = 6; i >= 0; --i)
+          if (arr.capacity != 21) return false;
+          for (int i = 14; i >= 0 ; --i)
           {
               arr.Remove(i);
           }
-          if (arr.capacity != 0 || arr.count != 0) return false;
+          if (arr.capacity != 16 || arr.count != 0) return false;
           //arr.Remove(18);
           return true;
       }

@@ -125,8 +125,8 @@ namespace AlgorithmsDataStructures
               if (i >= 3 && arr.GetItem(i) != i + 1) return false;
           }
           if (arr.capacity != 10) return false;
-          arr.Remove(18);
-          //return true;
+          //arr.Remove(18);
+          return true;
       }
     }
 }

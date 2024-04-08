@@ -65,12 +65,18 @@ namespace AlgorithmsDataStructures
            }
            --count;
        }
+       else if (capacity == 1)
+       {
+           --count;
+           MakeArray(0);
+       }
        else
        {
            MakeArray((int)(capacity / 1.5));
            Remove(index);
        }
      }
+
     }
     public class Program
     {
@@ -125,6 +131,11 @@ namespace AlgorithmsDataStructures
               if (i >= 3 && arr.GetItem(i) != i + 1) return false;
           }
           if (arr.capacity != 10) return false;
+          for (int i = 6; i >= 0; --i)
+          {
+              arr.Remove(i);
+          }
+          if (arr.capacity != 0 || arr.count != 0) return false;
           //arr.Remove(18);
           return true;
       }

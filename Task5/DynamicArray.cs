@@ -69,6 +69,7 @@ namespace AlgorithmsDataStructures
        {
            MakeArray(16);
            Remove(index);
+       }
        else
        {
            MakeArray((int)(capacity / 1.5));

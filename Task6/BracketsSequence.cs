@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 
@@ -47,28 +46,26 @@ namespace AlgorithmsDataStructures
       }
    }
 
-
     public class Program
     {
       public static bool IsRightBrackets(string str)
       {
-          leftBrackets Stack<char>  = new Stack<char>();
+          Stack<char> leftBrackets = new Stack<char>();
           foreach (char i in str)
           {
             if (i == '(') leftBrackets.Push(i);
             else if (i == ')') 
             {
-              if (leftBrackets.Pop() == defalt(char)) return false;
+              if (leftBrackets.Pop() == default(char)) return false;
             }
           }
-          if (leftBrakets.size() != 0) return false;
+          if (leftBrackets.Size() != 0) return false;
           return true;
       }
       public static void Main()
       {
-          Console.WriteLine(IIsRightBrackets("(((())))"));
+          Console.WriteLine(IsRightBrackets("(((())))"));
       }
     }
-    
     
 }

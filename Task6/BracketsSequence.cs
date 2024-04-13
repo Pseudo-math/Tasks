@@ -58,9 +58,8 @@ namespace AlgorithmsDataStructures
             {
               if (leftBrackets.Pop() == default(char)) return false;
             }
-          }
-          if (leftBrackets.Size() != 0) return false;
-          return true;
+	  }
+	  return leftBrackets.Size() == 0 ? true : false;
       }
       public static void Main()
       {

@@ -60,7 +60,7 @@ namespace AlgorithmsDataStructures
 	      leftBrackets.Pop();
             }
 	  }
-	  return leftBrackets.Size() == 0 ? true : false;
+	  return leftBrackets.Size() == 0;
       }
       public static void Main()
       {

@@ -55,9 +55,9 @@ namespace AlgorithmsDataStructures
           {
             if (i == '(') leftBrackets.Push(i);
             else if (i == ')') 
-            {
-              leftBrackets.Pop();
+	    { 
               if (leftBrackets.Size() == 0) return false;
+	      leftBrackets.Pop();
             }
 	  }
 	  return leftBrackets.Size() == 0 ? true : false;

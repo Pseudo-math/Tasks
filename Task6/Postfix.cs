@@ -80,15 +80,15 @@ namespace AlgorithmsDataStructures
               temp = buffer.Pop();
               int number;
               if (int.TryParse(temp, out number)) result.Push(number);
-              else if (temp == "+") result.Push(result.Pop() + result.Pop());
-              else if (temp == "*") result.Push(result.Pop() * result.Pop());
-              else if (temp == "-") result.Push(-result.Pop() + result.Pop());
-              else if (temp == "/") 
+              else if (temp == "=") return result.Pop();
+              else
               {
-                  number = result.Pop();
-                  result.Push(result.Pop() / number);
+                  int numberSecond = result.Pop(), numberFirst = result.Pop();
+                  if (temp == "+") result.Push(numberFirst + numberSecond);
+                  else if (temp == "*") result.Push(numberFirst * numberSecond);
+                  else if (temp == "-") result.Push(numberFirst - numberSecond);
+                  else if (temp == "/") result.Push(numberFirst / numberSecond);
               }
-              else return result.Pop();
           }
           return default(int);
            

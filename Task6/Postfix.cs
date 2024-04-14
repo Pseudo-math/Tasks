@@ -53,6 +53,7 @@ namespace AlgorithmsDataStructures
           Stack<string> buffer = new Stack<string>();
           Stack<int> result = new Stack<int>();
           string temp = "";
+          char[] operations = {'+', '*', '-', '/', '='};
           for (int i = str.Length - 1; i >= 0; --i)
           {
             if (Char.IsDigit(str[i]))
@@ -65,8 +66,14 @@ namespace AlgorithmsDataStructures
                 buffer.Push(temp);
                 temp = "";
             }
-            else if (str[i] == '+' || str[i] == '*' || str[i] == '=') 
-                buffer.Push(str[i].ToString());
+            else foreach (char j in operations)
+            {
+                if (str[i] == j)
+                {
+                    buffer.Push(str[i].ToString());
+                    break;
+                }
+            }
           }
           for (int i = buffer.Size(); i > 0; --i)
           {
@@ -75,6 +82,12 @@ namespace AlgorithmsDataStructures
               if (int.TryParse(temp, out number)) result.Push(number);
               else if (temp == "+") result.Push(result.Pop() + result.Pop());
               else if (temp == "*") result.Push(result.Pop() * result.Pop());
+              else if (temp == "-") result.Push(-result.Pop() + result.Pop());
+              else if (temp == "/") 
+              {
+                  number = result.Pop();
+                  result.Push(result.Pop() / number);
+              }
               else return result.Pop();
           }
           return default(int);
@@ -83,7 +96,7 @@ namespace AlgorithmsDataStructures
 	  
       public static void Main()
       {
-          Console.WriteLine(PostfixOperations("8 2 + 5 * 9 + ="));
+          Console.WriteLine(PostfixOperations("8 2 + 5 * 9 + 40 - 3 / ="));
       }
     }
     

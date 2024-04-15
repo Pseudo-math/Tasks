@@ -83,7 +83,8 @@ namespace AlgorithmsDataStructures
               else if (temp == "=") return result.Pop();
               else
               {
-                  int numberSecond = result.Pop(), numberFirst = result.Pop();
+                  int numberSecond = result.Pop();
+	          int numberFirst = result.Pop();
                   if (temp == "+") result.Push(numberFirst + numberSecond);
                   else if (temp == "*") result.Push(numberFirst * numberSecond);
                   else if (temp == "-") result.Push(numberFirst - numberSecond);

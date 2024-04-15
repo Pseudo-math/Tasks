@@ -48,8 +48,17 @@ namespace AlgorithmsDataStructures
 
     public class Program
     {
+      delegate int Operation (int x, int y);
+      
       public static int PostfixOperations(string str)
       {
+          var operationsDictionary = new Dictionary<string, Operation>
+          {
+              {"+", (x, y) => x + y},
+              {"*", (x, y) => x * y},
+              {"-", (x, y) => x - y},
+              {"/", (x, y) => x / y}
+          };
           Stack<string> buffer = new Stack<string>();
           Stack<int> result = new Stack<int>();
           string temp = "";
@@ -83,12 +92,8 @@ namespace AlgorithmsDataStructures
               else if (temp == "=") return result.Pop();
               else
               {
-                  int numberSecond = result.Pop();
-	          int numberFirst = result.Pop();
-                  if (temp == "+") result.Push(numberFirst + numberSecond);
-                  else if (temp == "*") result.Push(numberFirst * numberSecond);
-                  else if (temp == "-") result.Push(numberFirst - numberSecond);
-                  else if (temp == "/") result.Push(numberFirst / numberSecond);
+                  int numberSecond = result.Pop(), numberFirst = result.Pop();
+                  result.Push(operationsDictionary[temp](numberFirst, numberSecond));
               }
           }
           return default(int);

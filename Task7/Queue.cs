@@ -5,7 +5,9 @@ namespace AlgorithmsDataStructures
 {
 
    public class Queue<T>
-   {
+   { 
+      private List<T> elements;
+      
       public Queue()
       {
        elements = new List<T>();

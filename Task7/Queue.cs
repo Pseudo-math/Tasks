@@ -22,7 +22,7 @@ namespace AlgorithmsDataStructures
       {
         if (elements.Count != 0)
 	{
-            T result = elements(elements.Count - 1);
+            T result = elements[elements.Count - 1];
             elements.RemoveAt(elements.Count);
 	    return result;
 	}

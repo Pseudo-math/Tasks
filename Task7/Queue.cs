@@ -23,7 +23,7 @@ namespace AlgorithmsDataStructures
         if (elements.Count != 0)
 	{
             T result = elements[elements.Count - 1];
-            elements.RemoveAt(elements.Count);
+            elements.RemoveAt(elements.Count - 1);
 	    return result;
 	}
         return default(T); // если очередь пустая

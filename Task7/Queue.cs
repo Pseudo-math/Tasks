@@ -4,46 +4,34 @@ using System.Collections.Generic;
 namespace AlgorithmsDataStructures
 {
 
-   public class Stack<T>
+   public class Queue<T>
    {
-      private List<T> elements;
-      private int size;
-      
-      
-      public Stack()
+      public Queue()
       {
        elements = new List<T>();
-       size = 0;
       } 
 
-      public int Size() 
+      public void Enqueue(T item)
       {
-       return size;
+        elements.Insert(0, item);
       }
 
-      public T Pop()
+      public T Dequeue()
       {
-       if (size != 0)
-       {
-           T result = elements[size - 1];
-           elements.RemoveAt(size - 1);
-           --size;
-           return result;
-       }
-       return default(T); // null, если стек пустой
-      }
-	  
-      public void Push(T val)
-      {
-       elements.Add(val);
-       ++size;
+        if (elements.Count != 0)
+	{
+            T result = elements(elements.Count - 1);
+            elements.RemoveAt(elements.Count);
+	    return result;
+	}
+        return default(T); // если очередь пустая
       }
 
-      public T Peek()
+      public int Size()
       {
-       if (size != 0) return elements[size - 1];
-       return default(T); // null, если стек пустой
+        return elements.Count; // размер очереди
       }
+
    }
-
 }
+

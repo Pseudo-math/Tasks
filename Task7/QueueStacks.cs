@@ -22,10 +22,10 @@ namespace AlgorithmsDataStructures
 
       public T Dequeue()
       {
+        if (Size() == 0) return default(T);
         if (elementsSecond.Count != 0) return elementsSecond.Pop();
         for (int i = elementsFirst.Count; i > 0; --i) elementsSecond.Push(elementsFirst.Pop());
-        if (elementsSecond.Count != 0) return elementsSecond.Pop();
-        return default(T); // если очередь пустая
+        return elementsSecond.Pop();
       }
 
       public int Size()

@@ -20,10 +20,10 @@ namespace AlgorithmsDataStructures
         elementsFirst.Push(item);
       }
 
-      public T Dequeue()
+      public T Dequeue(
       {
         for (int i = elementsFirst.Count; i > 0; --i) elementsSecond.Push(elementsFirst.Pop());
-        if (elementsSecond.Count != 0) return elements.Second.Pop();
+        if (elementsSecond.Count != 0) return elementsSecond.Pop();
         return default(T); // если очередь пустая
       }
 

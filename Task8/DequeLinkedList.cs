@@ -20,7 +20,7 @@ namespace AlgorithmsDataStructures
 
     public void AddTail(T item)
     {
-     elements.AddLast(T);
+     elements.AddLast(item);
     }
 
     public T RemoveFront()

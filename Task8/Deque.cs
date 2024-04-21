@@ -10,7 +10,7 @@ namespace AlgorithmsDataStructures
     
     public Deque()
     {
-     List<T> elements = new List<T>();
+     elements = new List<T>();
     }
 
     public void AddFront(T item)

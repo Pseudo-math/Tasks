@@ -10,7 +10,7 @@ namespace AlgorithmsDataStructures
     
     public Deque()
     {
-     LinkedList<T> elements = new LinkedList<T>();
+     elements = new LinkedList<T>();
     }
 
     public void AddFront(T item)

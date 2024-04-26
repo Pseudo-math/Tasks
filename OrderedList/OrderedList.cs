@@ -57,26 +57,80 @@ namespace AlgorithmsDataStructures
 
     public void Add(T value)
     {
+        Node<T> node;
+        for (node = head; node != null && node.next != null && (Compare(value, node.value) == 1); node = node.next)
+        InsertAfter(node, new Node(value));
         // автоматическая вставка value 
         // в нужную позицию
-        ++size;
+    }
+    private void AddInTail(Node<T> _item)
+    {
+       if (head == null) {
+        head = _item;
+        head.next = null;
+        head.prev = null;
+       } else {
+        tail.next = _item;
+        _item.prev = tail;
+       }
+       tail = _item;
+       ++size;
+    }
+    private void InsertAfter(Node<T> _nodeAfter, Node<T> _nodeToInsert)
+     {
+       if (_nodeAfter == null && head != null)
+       {
+          _nodeToInsert.next = head;
+          head.prev = _nodeToInsert;
+          head = _nodeToInsert;
+          head.prev = null;
+          ++count;
+       }
+       else if (_nodeAfter != null && _nodeAfter.next != null)
+       {
+          _nodeToInsert.next = _nodeAfter.next;
+          _nodeToInsert.prev = _nodeAfter;
+          _nodeToInsert.next.prev = _nodeToInsert;
+          _nodeAfter.next = _nodeToInsert;
+          ++count;
+       }
+       else AddInTail(_nodeToInsert);
     }
 
     public Node<T> Find(T val)
     {
+        for (Node<T> node = head; node != null; node = node.next)
+            if (node.value == _value) return node;
         return null; // здесь будет ваш код
     }
-
+    
+    public void Delete(Node<T> node)
+    {
+       if (node.prev != null) node.prev.next = node.next;
+       if (node.next != null) node.next.prev = node.prev;
+       if (node == head) head = node.next;
+       if (node == tail) tail = node.prev;
+       --size;
+    }
+    
     public void Delete(T val)
     {
-        // здесь будет ваш код
-        --size;
+       Node node = Find(_value);
+       if (node != null) Remove(node);
     }
 
     public void Clear(bool asc)
     {
+        Node node = head;
+        for (Node node = head; node != null; node = head.next;)
+        {
+            head.next = node.next;
+            node.next = null;
+            node.prev = null;
+        }
+        tail = null;
+        size = 0;
         _ascending = asc;
-        // здесь будет ваш код
     }
 
     public int Count()
@@ -88,12 +142,7 @@ namespace AlgorithmsDataStructures
                            // списка в виде стандартного списка
     {
         List<Node<T>> r = new List<Node<T>>();
-        Node<T> node = head;
-        while(node != null)
-        {
-            r.Add(node);
-            node = node.next;
-        }
+        for (Node<T> node = head; node != null; node = node.next) r.Add(node);
         return r;
     }
   }

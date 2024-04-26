@@ -36,7 +36,7 @@ namespace AlgorithmsDataStructures
       int result = 0;
       if(typeof(T) == typeof(String))
       {
-        result = String.Compare(Trim(v1), Trim(v2));
+        result = String.Compare(String.Trim(v1), String.Trim(v2));
         if (result < 0) return -1;
         if (result > 0) return 1;
         return 0;
@@ -147,3 +147,5 @@ namespace AlgorithmsDataStructures
   }
  
 }
+
+

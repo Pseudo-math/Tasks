@@ -17,7 +17,7 @@ namespace AlgorithmsDataStructures
     }
   }
 
-  public class OrderedList<T>
+  public class OrderedList<T> where T : IComparable<T>
   {
     public Node<T> head, tail;
     private bool _ascending;
@@ -30,26 +30,24 @@ namespace AlgorithmsDataStructures
       _ascending = asc;
       size = 0;
     }
-
     public int Compare(T v1, T v2)
     {
       int result = 0;
-      if(typeof(T) == typeof(String))
+      if (typeof(T) == typeof(String))
       {
-        result = String.Compare(String.Trim(v1), String.Trim(v2));
+        result = String.Compare(((string)(object)v1).Trim(), ((string)(object)v2).Trim());
         if (result < 0) return -1;
         if (result > 0) return 1;
         return 0;
       }
       else 
       {
-        if (v1 < v2) return -1;
-        if (v1 > v2) return 1;
+        result = v1.CompareTo(v2);
+        if (result < 0) return -1;
+        if (result > 0) return 1;
         return 0;
         // универсальное сравнение
       }
-      
-      return result;
       // -1 если v1 < v2
       // 0 если v1 == v2
       // +1 если v1 > v2
@@ -59,7 +57,7 @@ namespace AlgorithmsDataStructures
     {
         Node<T> node;
         for (node = head; node != null && node.next != null && (Compare(value, node.value) == 1); node = node.next)
-        InsertAfter(node, new Node(value));
+        InsertAfter(node, new Node<T>(value));
         // автоматическая вставка value 
         // в нужную позицию
     }
@@ -84,7 +82,7 @@ namespace AlgorithmsDataStructures
           head.prev = _nodeToInsert;
           head = _nodeToInsert;
           head.prev = null;
-          ++count;
+          ++size;
        }
        else if (_nodeAfter != null && _nodeAfter.next != null)
        {
@@ -92,7 +90,7 @@ namespace AlgorithmsDataStructures
           _nodeToInsert.prev = _nodeAfter;
           _nodeToInsert.next.prev = _nodeToInsert;
           _nodeAfter.next = _nodeToInsert;
-          ++count;
+          ++size;
        }
        else AddInTail(_nodeToInsert);
     }
@@ -100,7 +98,7 @@ namespace AlgorithmsDataStructures
     public Node<T> Find(T val)
     {
         for (Node<T> node = head; node != null; node = node.next)
-            if (node.value == _value) return node;
+            if (val.Equals(node.value)) return node;
         return null; // здесь будет ваш код
     }
     
@@ -115,13 +113,13 @@ namespace AlgorithmsDataStructures
     
     public void Delete(T val)
     {
-       Node node = Find(_value);
-       if (node != null) Remove(node);
+       Node<T> node = Find(val);
+       if (node != null) Delete(node);
     }
 
     public void Clear(bool asc)
     {
-        for (Node<T> node = head; node != null; node = head.next;)
+        for (Node<T> node = head; node != null; node = head.next)
         {
             head.next = node.next;
             node.next = null;
@@ -147,5 +145,4 @@ namespace AlgorithmsDataStructures
   }
  
 }
-
 

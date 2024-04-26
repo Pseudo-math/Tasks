@@ -21,12 +21,14 @@ namespace AlgorithmsDataStructures
   {
     public Node<T> head, tail;
     private bool _ascending;
+    private int size;
 
     public OrderedList(bool asc)
     {
       head = null;
       tail = null;
       _ascending = asc;
+      size = 0;
     }
 
     public int Compare(T v1, T v2)
@@ -57,6 +59,7 @@ namespace AlgorithmsDataStructures
     {
         // автоматическая вставка value 
         // в нужную позицию
+        ++size;
     }
 
     public Node<T> Find(T val)
@@ -67,6 +70,7 @@ namespace AlgorithmsDataStructures
     public void Delete(T val)
     {
         // здесь будет ваш код
+        --size;
     }
 
     public void Clear(bool asc)
@@ -77,7 +81,7 @@ namespace AlgorithmsDataStructures
 
     public int Count()
     {
-       return 0; // здесь будет ваш код подсчёта количества элементов в списке
+       return size; // здесь будет ваш код подсчёта количества элементов в списке
     }
 
     List<Node<T>> GetAll() // выдать все элементы упорядоченного 

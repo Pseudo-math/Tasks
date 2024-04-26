@@ -56,7 +56,8 @@ namespace AlgorithmsDataStructures
     public void Add(T value)
     {
         Node<T> node;
-        for (node = head; node != null && node.next != null && (Compare(value, node.value) == 1); node = node.next)
+        int sign = _ascending ? 1 : -1;
+        for (node = head; node != null && node.next != null && (Compare(value, node.value) == sign); node = node.next)
         InsertAfter(node, new Node<T>(value));
         // автоматическая вставка value 
         // в нужную позицию

@@ -121,8 +121,7 @@ namespace AlgorithmsDataStructures
 
     public void Clear(bool asc)
     {
-        Node node = head;
-        for (Node node = head; node != null; node = head.next;)
+        for (Node<T> node = head; node != null; node = head.next;)
         {
             head.next = node.next;
             node.next = null;

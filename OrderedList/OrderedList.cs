@@ -44,7 +44,7 @@ namespace AlgorithmsDataStructures
       {
         IComparable comparable1 = (IComparable)v1;
         IComparable comparable2 = (IComparable)v2;
-        result = comparable1.CompareTo(comparable2); // Универсальное сравнение  
+        result = comparable1.CompareTo(comparable2);
         if (result < 0) return -1;
         if (result > 0) return 1;
         return 0;

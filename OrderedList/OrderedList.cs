@@ -42,7 +42,9 @@ namespace AlgorithmsDataStructures
       }
       else 
       {
-        result = v1.CompareTo(v2);
+        IComparable comparable1 = (IComparable)v1;
+        IComparable comparable2 = (IComparable)v2;
+        result = comparable1.CompareTo(comparable2); // Универсальное сравнение  
         if (result < 0) return -1;
         if (result > 0) return 1;
         return 0;
@@ -139,5 +141,5 @@ namespace AlgorithmsDataStructures
     }
   }
  
-}
+} 
 

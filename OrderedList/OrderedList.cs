@@ -55,10 +55,11 @@ namespace AlgorithmsDataStructures
 
     public void Add(T value)
     {
-        Node<T> node;
+        Node<T> nodeAfter = null;
         int sign = _ascending ? 1 : -1;
-        for (node = head; node != null && node.next != null && (Compare(value, node.value) == sign); node = node.next)
-        InsertAfter(node, new Node<T>(value));
+        for (Node<T> node = head; node != null && (Compare(value, node.value) == sign); node = node.next)
+            nodeAfter = node;
+        InsertAfter(nodeAfter, new Node<T>(value));
         // автоматическая вставка value 
         // в нужную позицию
     }
@@ -120,9 +121,9 @@ namespace AlgorithmsDataStructures
 
     public void Clear(bool asc)
     {
-        for (Node<T> node = head; node != null; node = head.next)
+        for (Node<T> node = head; node != null; node = head)
         {
-            head.next = node.next;
+            head = node.next;
             node.next = null;
             node.prev = null;
         }

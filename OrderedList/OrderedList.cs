@@ -95,7 +95,7 @@ namespace AlgorithmsDataStructures
     {
         for (Node<T> node = head; node != null; node = node.next)
             if (val.Equals(node.value)) return node;
-        return null; // здесь будет ваш код
+        return null;
     }
     
     public void Delete(Node<T> node)

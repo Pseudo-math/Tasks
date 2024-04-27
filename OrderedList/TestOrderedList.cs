@@ -46,7 +46,6 @@ namespace AlgorithmsDataStructures
         if (result < 0) return -1;
         if (result > 0) return 1;
         return 0;
-        // универсальное сравнение
       }
       // -1 если v1 < v2
       // 0 если v1 == v2

@@ -17,7 +17,7 @@ namespace AlgorithmsDataStructures
     }
   }
 
-  public class OrderedList<T> where T : IComparable<T>
+  public class OrderedList<T>
   {
     public Node<T> head, tail;
     private bool _ascending;

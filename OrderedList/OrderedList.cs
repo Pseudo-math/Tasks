@@ -46,11 +46,7 @@ namespace AlgorithmsDataStructures
         if (result < 0) return -1;
         if (result > 0) return 1;
         return 0;
-        // универсальное сравнение
       }
-      // -1 если v1 < v2
-      // 0 если v1 == v2
-      // +1 если v1 > v2
     }
 
     public void Add(T value)
@@ -60,8 +56,6 @@ namespace AlgorithmsDataStructures
         for (Node<T> node = head; node != null && (Compare(value, node.value) == sign); node = node.next)
             nodeAfter = node;
         InsertAfter(nodeAfter, new Node<T>(value));
-        // автоматическая вставка value 
-        // в нужную позицию
     }
     private void AddInTail(Node<T> _item)
     {
@@ -134,11 +128,10 @@ namespace AlgorithmsDataStructures
 
     public int Count()
     {
-       return size; // здесь будет ваш код подсчёта количества элементов в списке
+       return size;
     }
 
-    List<Node<T>> GetAll() // выдать все элементы упорядоченного 
-                           // списка в виде стандартного списка
+    List<Node<T>> GetAll() 
     {
         List<Node<T>> r = new List<Node<T>>();
         for (Node<T> node = head; node != null; node = node.next) r.Add(node);

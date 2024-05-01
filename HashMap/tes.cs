@@ -66,7 +66,7 @@ namespace AlgorithmsDataStructures
            Console.WriteLine(TestPutWithCollisions());
        }
        public bool TestSeekSlot()
-    {
+       {
         HashTable
         // Insert values with potential collisions
         hashTable.put("apple");
@@ -88,24 +88,31 @@ namespace AlgorithmsDataStructures
         }
 
         return true;
-    }
+        }
 
     // Test put functionality with collisions
-    public bool TestPutWithCollisions()
+    public bool TestFind()
     {
-        // Insert values with collisions
-        hashTable.put("apple");
-        hashTable.put("pale"); // Collision with "apple"
-        hashTable.put("banana");
-        hashTable.put("naan"); // Collision with "banana"
-
-        // Check if all values are stored correctly
-        if (hashTable.find("apple") == null ||
-            hashTable.find("pale") == null ||
-            hashTable.find("banana") == null ||
-            hashTable.find("naan") == null)
+        HashTable hashTable = new HashTable(17, 1);
+        string[] values = { "apple", "banana", "cherry", "date", "elderberry" };
+        foreach (string value in values)
         {
-            return false; // Value not found
+            hashTable.Put(value);
+        }
+
+        // Test finding existing values
+        foreach (string value in values)
+        {
+            if (hashTable.Find(value) == -1)
+            {
+                return false; // Value not found
+            }
+        }
+
+        // Test finding non-existent values
+        if (hashTable.Find("grape") != -1)
+        {
+            return false; // Found non-existent value
         }
 
         return true;

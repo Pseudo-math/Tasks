@@ -20,16 +20,16 @@ namespace AlgorithmsDataStructures
 
     public int HashFun(string value)
     {    
-         byte[] bytes = Encoding.GetBytes(value);
+         byte[] bytes = System.Text.Encoding.GetBytes(value);
          int result = 0;
          foreach (var i in bytes)
-           result += ToInt32(i);
+           result += Convert.ToInt32(i);
          return result % size;
     }
 
     public int SeekSlot(string value)
     {
-         int slot = HushFun(value);
+         int slot = HashFun(value);
          if (slots[slot] == null) return slot;
          for (int i = (slot + step) % size; i != slot; i = (i + step) % size)
            if (slots[i] == null) return i;
@@ -49,7 +49,7 @@ namespace AlgorithmsDataStructures
 
      public int Find(string value)
      {
-         int slot = HushFun(value);
+         int slot = HashFun(value);
          if (slots[slot] == value) return slot;
          for (int i = (slot + step) % size; i != slot; i = (i + step) % size)
            if (slots[i] == value) return i;

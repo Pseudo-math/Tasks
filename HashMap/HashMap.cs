@@ -41,7 +41,7 @@ namespace AlgorithmsDataStructures
          int slot = SeekSlot(value);
          if (slot != -1)
          {
-           slots[slot] = value
+           slots[slot] = value;
            return slot;
          }
          return -1;

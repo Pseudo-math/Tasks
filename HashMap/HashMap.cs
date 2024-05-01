@@ -20,7 +20,7 @@ namespace AlgorithmsDataStructures
 
     public int HashFun(string value)
     {    
-         byte[] bytes = System.Text.Encoding.GetBytes(value);
+         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(value);
          int result = 0;
          foreach (var i in bytes)
            result += Convert.ToInt32(i);

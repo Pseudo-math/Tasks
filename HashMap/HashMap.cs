@@ -26,7 +26,10 @@ namespace AlgorithmsDataStructures
 
     public int SeekSlot(string value)
     {
-         // находит индекс пустого слота для значения, или -1
+         int slot = HushFun(value);
+         if (slots[slot] == null) return slot;
+         for (int i = (slot + step) % size; i != slot; i = (i + step) % size)
+           if (slots[i] == null) return i;
          return -1;
     }
 
@@ -43,7 +46,10 @@ namespace AlgorithmsDataStructures
 
      public int Find(string value)
      {
-         // находит индекс слота со значением, или -1
+         int slot = HushFun(value);
+         if (slots[slot] == value) return slot;
+         for (int i = (slot + step) % size; i != slot; i = (i + step) % size)
+           if (slots[i] == value) return i;
          return -1;
      }
   }

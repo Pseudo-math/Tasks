@@ -20,8 +20,11 @@ namespace AlgorithmsDataStructures
 
     public int HashFun(string value)
     {    
-         // всегда возвращает корректный индекс слота
-         return 0;
+         byte[] bytes = Encoding.GetBytes(value);
+         int result = 0;
+         foreach (var i in bytes)
+           result += ConvertToInt(i);
+         return result % size;
     }
 
     public int SeekSlot(string value)

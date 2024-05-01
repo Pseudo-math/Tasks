@@ -63,29 +63,34 @@ namespace AlgorithmsDataStructures
        public static void Main()
        {
            Console.WriteLine(TestSeekSlot());
-           Console.WriteLine(TestPutWithCollisions());
+           Console.WriteLine(TestFind());
        }
        public bool TestSeekSlot()
        {
-        HashTable
+        HashTable hashTable = new HashTable(17, 1);
         // Insert values with potential collisions
-        hashTable.put("apple");
-        hashTable.put("pale"); // Collision with "apple"
-        hashTable.put("banana");
+        hashTable.Put("apple");
+        hashTable.Put("pale"); // Collision with "apple"
+        hashTable.Put("banana");
 
-        // Check if seek_slot returns the correct slot for existing values
-        if (hashTable.seek_slot("apple") != hashTable.find("apple") ||
-            hashTable.seek_slot("pale") != hashTable.find("pale") ||
-            hashTable.seek_slot("banana") != hashTable.find("banana"))
+        // Check if SeekSlot returns the expected slot for existing values
+        if (hashTable.SeekSlot("apple") != hashTable.Find("apple") ||
+            hashTable.SeekSlot("pale") != hashTable.Find("pale") ||
+            hashTable.SeekSlot("banana") != hashTable.Find("banana"))
         {
             return false; // Incorrect slot returned
         }
 
-        // Check if seek_slot creates a new slot for non-existent values
-        if (hashTable.seek_slot("grape") == null)
+        // Check if SeekSlot handles collisions and finds the next available slot
+        hashTable.Put("grape"); // Potential collision depending on table size and step
+        int grapeSlot = hashTable.SeekSlot("grape");
+        if (grapeSlot == -1 || hashTable.slots[grapeSlot] != null)
         {
-            return false; // Slot not created
+            return false; // Failed to find a slot or slot is not empty
         }
+
+        // Check if SeekSlot returns -1 when the table is full
+        // ... (Fill the table with values and then try to SeekSlot for a new value)
 
         return true;
         }

@@ -23,7 +23,7 @@ namespace AlgorithmsDataStructures
          byte[] bytes = Encoding.GetBytes(value);
          int result = 0;
          foreach (var i in bytes)
-           result += ConvertToInt(i);
+           result += ToInt32(i);
          return result % size;
     }
 

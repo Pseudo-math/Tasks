@@ -31,7 +31,7 @@ namespace AlgorithmsDataStructures
     {
          uint slot = HashFun(value);
          if (slots[slot] == null) return slot;
-         for (int i = (slot + step) % size; i != slot; i = (i + step) % size) // Unsigned????
+         for (uint i = (slot + step) % size; i != slot; i = (i + step) % size) // Unsigned????
            if (slots[i] == null) return i;
          return -1;
     }

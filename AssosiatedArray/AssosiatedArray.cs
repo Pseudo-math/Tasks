@@ -7,7 +7,7 @@ namespace AlgorithmsDataStructures
   public class NativeDictionary<T>
   {
     public int size;
-    private const int step = 2147483629; // Max prime Int32 number
+    private const uint step = 2147483629; // Max prime Int32 number
     public string [] slots;
     public T [] values;
 
@@ -29,7 +29,7 @@ namespace AlgorithmsDataStructures
     
     public int SeekSlot(string value)
     {
-         int slot = HashFun(value);
+         uint slot = HashFun(value);
          if (slots[slot] == null) return slot;
          for (int i = (slot + step) % size; i != slot; i = (i + step) % size) // Unsigned????
            if (slots[i] == null) return i;

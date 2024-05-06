@@ -29,37 +29,34 @@ namespace AlgorithmsDataStructures
     
     public int SeekSlot(string value)
     {
-         uint slot = HashFun(value);
-         if (slots[slot] == null) return slot;
-         for (uint i = (slot + step) % size; i != slot; i = (i + step) % size) // Unsigned????
-           if (slots[i] == null) return i;
-         return -1;
+      uint slot = HashFun(value);
+      if (slots[slot] == null) return slot;
+      for (uint i = (slot + step) % size; i != slot; i = (i + step) % size) // Unsigned????
+        if (slots[i] == null) return i;
     }
     
     public bool IsKey(string key)
     {
-      // возвращает true если ключ имеется,
-      // иначе false
+      uint slot = HashFun(key);
+      if (slots[slot] == key) return slot;
+      for (uint i = (slot + step) % size; i != slot; i = (i + step) % size)
+        if (slots[i] == key) return true;
       return false;
     }
 
     public void Put(string key, T value)
     {
-      int slot = SeekSlot(value);
-      if (slot != -1)
-      {
-        slots[slot] = value;
-        return slot;
-      }
-      return -1;
-      // гарантированно записываем 
-      // значение value по ключу key
+      int slot = SeekSlot(key);
+      slots[slot] = key;
+      values[slot] = value;
     }
 
     public T Get(string key)
     {
-      // возвращает value для key, 
-      // или null если ключ не найден
+      uint slot = HashFun(key);
+      if (slots[slot] == key) return slot;
+      for (uint i = (slot + step) % size; i != slot; i = (i + step) % size)
+        if (slots[i] == key) return values(i);
       return default(T);
     }
   } 

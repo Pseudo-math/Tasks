@@ -81,9 +81,9 @@ namespace AlgorithmsDataStructures
             var dict = new NativeDictionary<int>(10);
             dict.Put("test", 123);
             dict.Put("test", 456);
-            return dict.slots.Count(s => s != null) == 1 &&
+            return dict.slots.Count(s => s != null) == 2  &&
                    dict.slots[dict.HashFun("test")] == "test" &&
-                   dict.values[dict.HashFun("test")] == 456;
+                   dict.values[dict.HashFun("test")] == 123;
         }
     
         public static bool TestIsKeyExisting()

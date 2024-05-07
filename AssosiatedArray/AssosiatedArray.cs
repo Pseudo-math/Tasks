@@ -47,7 +47,7 @@ namespace AlgorithmsDataStructures
 
     public void Put(string key, T value)
     {
-      if (IsKey) throw new Exception("key already exist");
+      if (IsKey(key)) throw new Exception("key already exist");
       int slot = SeekSlot(key);
       slots[slot] = key;
       values[slot] = value;

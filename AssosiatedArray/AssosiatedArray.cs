@@ -6,6 +6,7 @@ namespace AlgorithmsDataStructures
 
   public class NativeDictionary<T>
   {
+    private readonly object locker = new(); 
     public uint size;
     private const uint step = 2147483629; // Max prime Int32 number
     public string [] slots;
@@ -47,10 +48,12 @@ namespace AlgorithmsDataStructures
 
     public void Put(string key, T value)
     {
-      if (IsKey(key)) throw new Exception("key already exist");
-      int slot = SeekSlot(key);
-      slots[slot] = key;
-      values[slot] = value;
+      lock (locker)
+      { 
+        int slot = SeekSlot(key);
+        slots[slot] = key;
+        values[slot] = value;
+      }
     }
 
     public T Get(string key)

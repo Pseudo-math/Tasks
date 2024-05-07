@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AlgorithmsDataStructures
 {
 
   public class NativeDictionary<T>
   {
-    private readonly object locker = new(); 
+      
     public uint size;
     private const uint step = 2147483629; // Max prime Int32 number
     public string [] slots;
     public T [] values;
+    private readonly object locker = new object(); 
 
     public NativeDictionary(int sz)
     {

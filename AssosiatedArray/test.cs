@@ -1,23 +1,21 @@
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace AlgorithmsDataStructures
 {
 
   public class NativeDictionary<T>
   {
-      
-    public uint size;
-    private const uint step = 2147483629; // Max prime Int32 number
+    public int size;
     public string [] slots;
     public T [] values;
     private readonly object locker = new object(); 
 
     public NativeDictionary(int sz)
     {
-      size = Convert.ToUInt32(sz);
+      size = sz;
       slots = new string[size];
       values = new T[size];
     }
@@ -28,23 +26,25 @@ namespace AlgorithmsDataStructures
       int result = 0;
       foreach (var i in bytes)
         result += Convert.ToInt32(i);
-      return result % Convert.ToInt32(size);
+      return result % size;
     }
     
     public int SeekSlot(string value)
     {
-      uint slot = Convert.ToUInt32(HashFun(value));
-      if (slots[slot] == null) return Convert.ToInt32(slot);
-      for (uint i = (slot + step) % size; i != slot; i = (i + step) % size) // Unsigned????
-        if (slots[i] == null) return Convert.ToInt32(i);
+      int slot = HashFun(value);
+      for (int i = slot; i < size; ++i)
+        if (slots[i] == null) return i;
+      for (int i = 0; i < slot; ++i)
+        if (slots[i] == null) return i;
       return -1;
     }
     
     public bool IsKey(string key)
     {
-      uint slot = Convert.ToUInt32(HashFun(key));
-      if (slots[slot] == key) return true;
-      for (uint i = (slot + step) % size; i != slot; i = (i + step) % size)
+      int slot = HashFun(key);
+      for (int i = slot; i < size; ++i)
+        if (slots[i] == key) return true;
+      for (int i = 0; i < slot; ++i)
         if (slots[i] == key) return true;
       return false;
     }
@@ -61,15 +61,14 @@ namespace AlgorithmsDataStructures
 
     public T Get(string key)
     {
-      uint slot = Convert.ToUInt32(HashFun(key));
-      if (slots[slot] == key) return values[slot];
-      for (uint i = (slot + step) % size; i != slot; i = (i + step) % size)
+      int slot = HashFun(key);
+      for (int i = slot; i < size; ++i)
         if (slots[i] == key) return values[i];
-      return default(T);
+      for (int i = 0; i < slot; ++i)
+        if (slots[i] == key) return values[i];
+      return default(T);    
     }
   } 
-
-
 
     public class NativeDictionaryTests
     {

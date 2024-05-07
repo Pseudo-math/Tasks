@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 
 namespace AlgorithmsDataStructures
@@ -7,10 +8,12 @@ namespace AlgorithmsDataStructures
 
   public class NativeDictionary<T>
   {
+      
     public uint size;
     private const uint step = 2147483629; // Max prime Int32 number
     public string [] slots;
     public T [] values;
+    private readonly object locker = new object(); 
 
     public NativeDictionary(int sz)
     {
@@ -48,9 +51,12 @@ namespace AlgorithmsDataStructures
 
     public void Put(string key, T value)
     {
-      int slot = SeekSlot(key);
-      slots[slot] = key;
-      values[slot] = value;
+      lock (locker)
+      { 
+        int slot = SeekSlot(key);
+        slots[slot] = key;
+        values[slot] = value;
+      }
     }
 
     public T Get(string key)
@@ -67,6 +73,18 @@ namespace AlgorithmsDataStructures
 
     public class NativeDictionaryTests
     {
+        public static bool TestPutLotNewKey()
+        {
+            var dict = new NativeDictionary<int>(10000);
+            for (int i = 0; i < 10000; ++i)
+            {
+                dict.Put("testaefasdfasdfasdfasdfasdf", i);
+            }
+            return dict.slots.Count(s => s != null) == 10000 &&
+                   dict.slots[dict.HashFun("testaefasdfasdfasdfasdfasdf")] == "testaefasdfasdfasdfasdfasdf" &&
+                   dict.values[dict.HashFun("testaefasdfasdfasdfasdfasdf")] == 0;
+        }
+        
         public static bool TestPutNewKey()
         {
             var dict = new NativeDictionary<int>(10);
@@ -117,6 +135,7 @@ namespace AlgorithmsDataStructures
         
         public static void Main(string[] args)
         {
+            Console.WriteLine(TestPutLotNewKey());
             Console.WriteLine(TestPutNewKey());
             Console.WriteLine(TestPutExistingKey());
             Console.WriteLine(TestIsKeyExisting());

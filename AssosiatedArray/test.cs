@@ -1,7 +1,7 @@
-using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace AlgorithmsDataStructures
 {
@@ -61,14 +61,28 @@ namespace AlgorithmsDataStructures
 
     public T Get(string key)
     {
+      T result;     
       int slot = HashFun(key);
       for (int i = slot; i < size; ++i)
-        if (slots[i] == key) return values[i];
+        if (slots[i] == key)
+        {
+          slots[i] = null;
+          result = values[i];
+          values[i] = default(T);
+          return result;
+        }
       for (int i = 0; i < slot; ++i)
-        if (slots[i] == key) return values[i];
+        if (slots[i] == key)
+        {
+          slots[i] = null;
+          result = values[i];
+          values[i] = default(T);
+          return result;
+        }
       return default(T);    
     }
-  } 
+  }
+
 
     public class NativeDictionaryTests
     {
@@ -130,6 +144,18 @@ namespace AlgorithmsDataStructures
             dict.Put("test", 123);
             return dict.Get("nonexistent") == 0; // Default value for int is 0
         }
+        public static bool TestGetNonexistentAfterKey()
+        {
+            bool first;
+            var dict = new NativeDictionary<int>(2);
+            dict.Put("test", 123);
+            first = dict.Get("test") == 123;
+            for (int i = 0; i < 2; ++i)
+            {
+                dict.Put("testaefasdfasdfasdfasdfasdf", i);
+            }
+            return first && (dict.Get("test") == 0); // Default value for int is 0
+        }
     
         
         public static void Main(string[] args)
@@ -141,6 +167,7 @@ namespace AlgorithmsDataStructures
             Console.WriteLine(TestIsKeyNonexistent());
             Console.WriteLine(TestGetExistingKey());
             Console.WriteLine(TestGetNonexistentKey());
+            Console.WriteLine(TestGetNonexistentAfterKey());
         }
     }
 }

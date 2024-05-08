@@ -62,9 +62,19 @@ namespace AlgorithmsDataStructures
     {
       int slot = HashFun(key);
       for (int i = slot; i < size; ++i)
-        if (slots[i] == key) return values[i];
+        if (slots[i] == key)
+        {
+          slot[i] = null;
+          values[i] = default(T);
+          return values[i];
+        }
       for (int i = 0; i < slot; ++i)
-        if (slots[i] == key) return values[i];
+        if (slots[i] == key)
+        {
+          slot[i] = null;
+          values[i] = default(T);
+          return values[i];
+        }
       return default(T);    
     }
   }

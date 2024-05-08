@@ -64,14 +64,14 @@ namespace AlgorithmsDataStructures
       for (int i = slot; i < size; ++i)
         if (slots[i] == key)
         {
-          slot[i] = null;
+          slots[i] = null;
           values[i] = default(T);
           return values[i];
         }
       for (int i = 0; i < slot; ++i)
         if (slots[i] == key)
         {
-          slot[i] = null;
+          slots[i] = null;
           values[i] = default(T);
           return values[i];
         }

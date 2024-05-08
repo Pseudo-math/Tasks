@@ -60,20 +60,23 @@ namespace AlgorithmsDataStructures
 
     public T Get(string key)
     {
+      T result;     
       int slot = HashFun(key);
       for (int i = slot; i < size; ++i)
         if (slots[i] == key)
         {
           slots[i] = null;
+          result = values[i];
           values[i] = default(T);
-          return values[i];
+          return result;
         }
       for (int i = 0; i < slot; ++i)
         if (slots[i] == key)
         {
           slots[i] = null;
+          result = values[i];
           values[i] = default(T);
-          return values[i];
+          return result;
         }
       return default(T);    
     }

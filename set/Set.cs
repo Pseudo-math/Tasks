@@ -56,8 +56,7 @@ namespace AlgorithmsDataStructures
    }
 
     public bool Get(T value)
-    {
-      T result;     
+    {     
       int slot = HashFun(value);
       for (int i = slot; i < size; ++i)
         if (slots[i].Equals(value))

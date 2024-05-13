@@ -68,38 +68,71 @@ namespace AlgorithmsDataStructures
           return true;
       return false;
     }
-
+    
     public bool Remove(T value)
     {
-        // возвращает true если value удалено
-        // иначе false
-        return false;
+      int slot = HashFun(value);
+      for (int i = slot; i < size; ++i)
+      {
+        if (slots[i].Equals(value)) 
+        {
+          slots[i] = default(T); // Или null, если T - ссылочный тип
+          --size;
+          return true;
+        }
+      }
+      for (int i = 0; i < slot; ++i)
+      {
+        if (slots[i].Equals(value)) 
+        {
+          slots[i] = default(T); // Или null, если T - ссылочный тип
+          --size;
+          return true;
+        }
+      }
+      return false;
     }
 
     public PowerSet<T> Intersection(PowerSet<T> set2)
     {
-        // пересечение текущего множества и set2
-        return null;
+      PowerSet<T> intersectionSet = new PowerSet<T>();
+      foreach (T item in slots) 
+      {
+        if (set2.IsKey(item)) 
+          intersectionSet.Put(item);
+      }
+      return intersectionSet;
     }
 
     public PowerSet<T> Union(PowerSet<T> set2)
     {
-        // объединение текущего множества и set2
-        return null;
+      PowerSet<T> unionSet = new PowerSet<T>();
+      foreach (T item in slots) 
+        unionSet.Put(item);
+      foreach (T item in set2.slots) 
+        unionSet.Put(item);
+      return unionSet;
     }
 
     public PowerSet<T> Difference(PowerSet<T> set2)
     {
-        // разница текущего множества и set2
-        return null;
+      PowerSet<T> differenceSet = new PowerSet<T>();
+      foreach (T item in slots)
+      {
+        if (!set2.IsKey(item))
+          differenceSet.Put(item);
+      }
+      return differenceSet;
     }
 
     public bool IsSubset(PowerSet<T> set2)
     {
-        // возвращает true, если set2 есть
-        // подмножество текущего множества,
-        // иначе false
-        return false;
+      foreach (T item in set2.slots)
+      {
+        if (!IsKey(item))
+          return false; 
+      }
+      return true;
     }
   }
 }

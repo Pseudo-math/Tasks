@@ -32,26 +32,25 @@ namespace AlgorithmsDataStructures
     {
       int slot = HashFun(value);
       for (int i = slot; i < size; ++i)
-        if (slots[i] == null) return i;
+        if (slots[i].Equals(default(T)) return i;
       for (int i = 0; i < slot; ++i)
-        if (slots[i] == null) return i;
+        if (slots[i].Equals(default(T)) return i;
       return -1;
     }
    public bool IsKey(T key)
     {
       int slot = HashFun(key);
       for (int i = slot; i < size; ++i)
-        if (slots[i] == key) return true;
+        if (slots[i].Equals(key)) return true;
       for (int i = 0; i < slot; ++i)
-        if (slots[i] == key) return true;
+        if (slots[i].Equals(key) return true;
       return false;
     }
    public void Put(T value)
    {  
       if (IsKey(value)) return;
-      int slot = SeekSlot(key);
-      slots[slot] = key;
-      values[slot] = value;
+      int slot = SeekSlot(value);
+      slots[slot] = value;
       ++size; 
      // всегда срабатывает
    }
@@ -59,12 +58,12 @@ namespace AlgorithmsDataStructures
     public bool Get(T value)
     {
       T result;     
-      int slot = HashFun(key);
+      int slot = HashFun(value);
       for (int i = slot; i < size; ++i)
-        if (slots[i] == key)
+        if (slots[i].Equals(value))
           return true;      
       for (int i = 0; i < slot; ++i)
-        if (slots[i] == key)
+        if (slots[i].Equals(value))
           return true;
       return false;
     }

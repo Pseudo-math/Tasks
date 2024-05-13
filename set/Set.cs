@@ -28,7 +28,7 @@ namespace AlgorithmsDataStructures
            result += Convert.ToInt32(i);
          return result % size;
    }
-   public int SeekSlot(string value)
+   public int SeekSlot(T value)
     {
       int slot = HashFun(value);
       for (int i = slot; i < size; ++i)

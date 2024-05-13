@@ -12,7 +12,7 @@ namespace AlgorithmsDataStructures
    public PowerSet()
    {
      size = 0;
-     slots = new T[size];
+     slots = new T[20000];
    }
 
     public int Size()
@@ -32,9 +32,9 @@ namespace AlgorithmsDataStructures
     {
       int slot = HashFun(value);
       for (int i = slot; i < size; ++i)
-        if (slots[i].Equals(default(T)) return i;
+        if (slots[i].Equals(default(T))) return i;
       for (int i = 0; i < slot; ++i)
-        if (slots[i].Equals(default(T)) return i;
+        if (slots[i].Equals(default(T))) return i;
       return -1;
     }
    public bool IsKey(T key)
@@ -43,7 +43,7 @@ namespace AlgorithmsDataStructures
       for (int i = slot; i < size; ++i)
         if (slots[i].Equals(key)) return true;
       for (int i = 0; i < slot; ++i)
-        if (slots[i].Equals(key) return true;
+        if (slots[i].Equals(key)) return true;
       return false;
     }
    public void Put(T value)

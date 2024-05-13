@@ -3,33 +3,70 @@ using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures
 {
-
-  // наследуйте этот класс от HashTable
-  // или расширьте его методами из HashTable
+  
   public class PowerSet<T>
   {
-
+   public int size;
+   public T [] slots; 
+   
    public PowerSet()
    {
-     // ваша реализация хранилища
+     size = 0;
+     slots = new T[size];
    }
 
     public int Size()
     {
         // количество элементов в множестве
-        return 0;
+        return size;
     }
-
+   public int HashFun(T value)
+   {    
+         byte[] bytes = System.Text.Encoding.UTF8.GetBytes((string)(object)value);
+         int result = 0;
+         foreach (var i in bytes)
+           result += Convert.ToInt32(i);
+         return result % size;
+   }
+   public int SeekSlot(string value)
+    {
+      int slot = HashFun(value);
+      for (int i = slot; i < size; ++i)
+        if (slots[i] == null) return i;
+      for (int i = 0; i < slot; ++i)
+        if (slots[i] == null) return i;
+      return -1;
+    }
+   public bool IsKey(T key)
+    {
+      int slot = HashFun(key);
+      for (int i = slot; i < size; ++i)
+        if (slots[i] == key) return true;
+      for (int i = 0; i < slot; ++i)
+        if (slots[i] == key) return true;
+      return false;
+    }
    public void Put(T value)
-   {
+   {  
+      if (IsKey(value)) return;
+      int slot = SeekSlot(key);
+      slots[slot] = key;
+      values[slot] = value;
+      ++size; 
      // всегда срабатывает
    }
 
     public bool Get(T value)
     {
-        // возвращает true если value имеется в множестве,
-        // иначе false
-        return false;
+      T result;     
+      int slot = HashFun(key);
+      for (int i = slot; i < size; ++i)
+        if (slots[i] == key)
+          return true;      
+      for (int i = 0; i < slot; ++i)
+        if (slots[i] == key)
+          return true;
+      return false;
     }
 
     public bool Remove(T value)

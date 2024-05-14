@@ -7,12 +7,13 @@ namespace AlgorithmsDataStructures
   public class PowerSet<T>
   {
    public int size;
+   private const int sizeInner = 20000;
    public T [] slots; 
    
    public PowerSet()
    {
      size = 0;
-     slots = new T[20000];
+     slots = new T[sizeInner];
    }
 
     public int Size()
@@ -26,12 +27,12 @@ namespace AlgorithmsDataStructures
          int result = 0;
          foreach (var i in bytes)
            result += Convert.ToInt32(i);
-         return result % size;
+         return result % sizeInner;
    }
    public int SeekSlot(T value)
     {
       int slot = HashFun(value);
-      for (int i = slot; i < size; ++i)
+      for (int i = slot; i < sizeInner; ++i)
         if (slots[i].Equals(default(T))) return i;
       for (int i = 0; i < slot; ++i)
         if (slots[i].Equals(default(T))) return i;
@@ -40,7 +41,7 @@ namespace AlgorithmsDataStructures
    public bool IsKey(T key)
     {
       int slot = HashFun(key);
-      for (int i = slot; i < size; ++i)
+      for (int i = slot; i < sizeInner; ++i)
         if (slots[i].Equals(key)) return true;
       for (int i = 0; i < slot; ++i)
         if (slots[i].Equals(key)) return true;
@@ -58,7 +59,7 @@ namespace AlgorithmsDataStructures
     public bool Get(T value)
     {     
       int slot = HashFun(value);
-      for (int i = slot; i < size; ++i)
+      for (int i = slot; i < sizeInner; ++i)
         if (slots[i].Equals(value))
           return true;      
       for (int i = 0; i < slot; ++i)
@@ -70,7 +71,7 @@ namespace AlgorithmsDataStructures
     public bool Remove(T value)
     {
       int slot = HashFun(value);
-      for (int i = slot; i < size; ++i)
+      for (int i = slot; i < sizeInner; ++i)
       {
         if (slots[i].Equals(value)) 
         {

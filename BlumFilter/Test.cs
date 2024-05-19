@@ -52,21 +52,21 @@ namespace AlgorithmsDataStructures
             {
                 int filterLength = 32;
                 int n = 10;
-    
+                string str = "0123456789";
                 BloomFilter bloomFilter = new BloomFilter(filterLength);
     
                 // Добавление строк в фильтр Блума
                 for (int i = 0; i < n; i++)
                 {
-                    string str = string.Format("{0:D10}", i);
                     bloomFilter.Add(str);
                     Console.WriteLine($"Добавлена строка: {str}");
+                    str = str.Substring(1) + str[0];
                 }
     
                 // Проверка наличия строк в фильтре Блума
+                str = "0123456789";
                 for (int i = 0; i < n; i++)
                 {
-                    string str = string.Format("{0:D10}", i);
                     if (bloomFilter.IsValue(str))
                     {
                         Console.WriteLine($"Строка {str} найдена в фильтре");
@@ -75,6 +75,7 @@ namespace AlgorithmsDataStructures
                     {
                         Console.WriteLine($"Строка {str} не найдена в фильтре (должна быть найдена)");
                     }
+                    str = str.Substring(1) + str[0];
                 }
     
                 // Проверка наличия несуществующих строк

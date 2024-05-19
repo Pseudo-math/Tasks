@@ -7,12 +7,12 @@ namespace AlgorithmsDataStructures
     public class BloomFilter
     {
       public int filter_len;
-      private BitArray BitArr;
+      private uint filter;
         
       public BloomFilter(int f_len)
       {
         filter_len = f_len;
-        BitArr  = new BitArray(f_len);
+        filter  = 0;
       }
 
       public int Hash1(string str1)
@@ -36,16 +36,18 @@ namespace AlgorithmsDataStructures
 
       public void Add(string str1)
       {
-        // добавляем строку str1 в фильтр
+        filter = filter | (1 << Hash1(str1))  | (1 << Hash2(str1));
       }
 
       public bool IsValue(string str1)
       {
-        // проверка, имеется ли строка str1 в фильтре
+        if ((filter & (1 << Hash1(str1))) != 0 && (filter & (1 << Hash2(str1))) != 0) true;
         return false;
       }
    }
 }
+
+
 
 
 

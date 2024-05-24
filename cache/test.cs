@@ -172,7 +172,18 @@ namespace AlgorithmsDataStructures
             }
             return first && (dict.Get("test") == 0); // Default value for int is 0
         }
-    
+        public static bool TestGetAfterCollision()
+        {
+            var dict = new NativeCache<int>(5);
+            dict.Put("key1", 1);
+            dict.Put("key2", 2);
+            dict.Put("key3", 3);
+            dict.Put("key4", 4);
+            dict.Put("key5", 5);
+            dict.Put("key6", 6); // Вытеснение
+
+            return dict.Get("key6") == 6;
+        }
         
         public static void Main(string[] args)
         {
@@ -184,6 +195,7 @@ namespace AlgorithmsDataStructures
             Console.WriteLine(TestGetExistingKey());
             Console.WriteLine(TestGetNonexistentKey());
             Console.WriteLine(TestGetNonexistentAfterKey());
+            Console.WriteLine(TestGetAfterCollision());
         }
     }
 }

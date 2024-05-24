@@ -14,7 +14,7 @@ namespace AlgorithmsDataStructures
     private readonly object locker = new object(); 
     private int slotForFree;
 
-    public NativeDictionary(int sz)
+    public NativeCache(int sz)
     {
       size = sz;
       slots = new string[size];
@@ -52,7 +52,7 @@ namespace AlgorithmsDataStructures
     }
     
     public void FreeSlot()
-    }
+    {
       slots[slotForFree] = null;
       values[slotForFree] = default(T);
       hits[slotForFree] = 0;

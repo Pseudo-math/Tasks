@@ -12,6 +12,7 @@ namespace AlgorithmsDataStructures
     public T [] values;
     public int [] hits;
     private readonly object locker = new object(); 
+    private int slotForFree;
 
     public NativeDictionary(int sz)
     {
@@ -49,15 +50,26 @@ namespace AlgorithmsDataStructures
         if (slots[i] == key) return true;
       return false;
     }
-
+    
+    public void FreeSlot()
+    }
+      slots[slotForFree] = null;
+      values[slotForFree] = default(T);
+      hits[slotForFree] = 0;
+    }
+    
     public void Put(string key, T value)
     {
       lock (locker)
       { 
         int slot = SeekSlot(key);
+        if (slot == -1) FreeSlot();
+        slot = SeekSlot(key);
         slots[slot] = key;
         values[slot] = value;
         ++hits[slot];
+        if (hits[slotForFree] > hits[slot]) 
+          slotForFree = slot;
       }
     }
 
